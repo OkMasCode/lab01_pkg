@@ -14,7 +14,8 @@ class Controller(Node):
         # Publisher to /cmd_topic
         self.cmd_vel_pub_ = self.create_publisher(Twist, "/cmd_topic", 10)
         # Timer to control the movement every 1 second
-        self.timer_ = self.create_timer(1.0, self.send_velocity_command)
+        self.period = 0.1
+        self.timer_ = self.create_timer(self.period, self.send_velocity_command)
         # Message initialization
         self.msg = Twist()
         # Movement control variables
@@ -43,7 +44,7 @@ class Controller(Node):
             self.msg.linear.y = self.directions[self.direction_index][1]
             # Publish the velocity command
             self.cmd_vel_pub_.publish(self.msg)
-            self.counter += 1 #increase the counter
+            self.counter += self.period #increase the counter
         else:
             # Move to the next direction
             self.direction_index = self.direction_index + 1  # Cycle through 4 directions

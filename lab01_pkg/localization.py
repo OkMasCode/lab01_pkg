@@ -18,7 +18,7 @@ class localization(Node):
         #initialization of variables
         self.x = 0.0
         self.y = 0.0
-        self.period = 1.0
+        self.period = 0.1
 
     def reset_callback(self, msg : Bool):
         #reset of variables when the reset message is received
