@@ -3,5 +3,3 @@ resource/
 setup.cfg
 setup.py
 test/
-lab01_pkg/_pycache_/
-lab01_pkg/__init__.py
