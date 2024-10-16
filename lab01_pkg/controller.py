@@ -13,8 +13,10 @@ class Controller(Node):
         self.res_sub_ 
         # Publisher to /cmd_topic
         self.cmd_vel_pub_ = self.create_publisher(Twist, "/cmd_topic", 10)
-        # Timer to control the movement every 1 second
-        self.period = 0.1
+        #I initialize the period as a parameter
+        self.declare_parameter("period", 0.1)   
+        self.period = self.get_parameter("period").get_parameter_value().double_value
+        # Timer to control the movement
         self.timer_ = self.create_timer(self.period, self.send_velocity_command)
         # Message initialization
         self.msg = Twist()

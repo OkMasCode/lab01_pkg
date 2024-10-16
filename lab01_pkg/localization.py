@@ -18,7 +18,8 @@ class localization(Node):
         #initialization of variables
         self.x = 0.0
         self.y = 0.0
-        self.period = 0.1
+        self.declare_parameter("period", 0.1)
+        self.period = self.get_parameter("period").get_parameter_value().double_value
 
     def reset_callback(self, msg : Bool):
         #reset of variables when the reset message is received
@@ -36,7 +37,7 @@ class localization(Node):
         pos.position.x = self.x
         pos.position.y = self.y
         self.pos_pub_.publish(pos)
-        self.get_logger().info(f"Pose: ({self.x},{self.y})")
+        self.get_logger().info(f"Pose: ({self.x:.2},{self.y:.2})")
         #we put the update of the position after the publish
         #In this way we publish what is the position before the movement
         update_x = self.period * msg.linear.x
